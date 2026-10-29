@@ -1,0 +1,17 @@
+{
+    "configurations": 
+    [
+        {
+            "name": "UCRT64",
+            "compilerPath": "E:\\msys2\\mingw64\\bin\\g++.exe",
+            "includePath": 
+            [
+                "${workspaceFolder}/Libs/SDL3/include",
+                "${workspaceFolder}/SDL3",
+                "${workspaceFolder}/Engine"
+            ],
+            "intelliSenseMode": "windows-gcc-x64"
+        }
+    ],
+    "version": 4
+}
