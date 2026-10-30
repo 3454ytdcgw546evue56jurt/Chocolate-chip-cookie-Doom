@@ -7,6 +7,7 @@
             "includePath": 
             [
                 "${workspaceFolder}/Libs/SDL3/include",
+                "${workspaceFolder}/Libs/SDL3_image/include",
                 "${workspaceFolder}/SDL3",
                 "${workspaceFolder}/Engine"
             ],

@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <cstdlib>
+#include <errno.h>
 
 #define wad_identification_size 4
 #define wad_numlumps_size 4
@@ -16,19 +17,20 @@ WAD_Header* Load_WAD(const char *FileName, WAD_Header* PatchWAD)
 {
     FILE* Wadfile;
 
-    // Opening the file in read mode
     Wadfile = fopen(FileName, "rb");
+
+    // Opening the file in read mode
 
     if(Wadfile == NULL) 
     {
-        printf("Error opening the file. \n");
+        printf("Error opening the file %s. \n",FileName);
+        printf("Error %s\n", strerror(errno));
         return nullptr;
     }
 
     int file_size = 0;
     
-    char identification[5];
-    identification[5] = 0x0;
+    char identification[4];
     fread(&identification, wad_identification_size, 1, Wadfile);
 
     bool Patch_file = false;

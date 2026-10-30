@@ -1,5 +1,5 @@
-#include "SDL3\SDL.h"
-#include "SDL3_image\SDL_image.h"
+#include <SDL3/SDL.h>
+#include <SDL3_image/SDL_image.h>
 #include "Renderer.h"
 #include <stdio.h>
 #include <string>
@@ -184,7 +184,7 @@ Rendering_init_result Renderer_init(int Screen_widht,int Screen_height,int Flags
     Window = SDL_CreateWindow(WindowName.c_str(),Screen_widht,Screen_height,Window_flags);
     if(Window == nullptr)
     {
-        printf("Error SDL_CreateWindow %S \n",SDL_GetError());
+        printf("Error SDL_CreateWindow %s \n",SDL_GetError());
         return Window_init_error;
     }
 
@@ -210,8 +210,17 @@ Rendering_init_result Renderer_init(int Screen_widht,int Screen_height,int Flags
     SDL_Surface *Window_Surface = SDL_GetWindowSurface(Window);
     if(Window_Surface == nullptr)
     {
-        printf("Error SDL_GetWindowSurface %S\n",SDL_GetError());
-        return Resolution_error;  
+        #if __linux__
+            Window_Surface = SDL_CreateSurface(Frame_widht,Frame_height,SDL_PIXELFORMAT_ARGB8888);
+            if(Window_Surface == nullptr)
+            {
+                printf("Error SDL_GetWindowSurface %s\n",SDL_GetError());
+                return Resolution_error;
+            }
+        #else
+            printf("Error SDL_GetWindowSurface %s\n",SDL_GetError());
+            return Resolution_error;
+        #endif
     }
     SDL_PixelFormat Window_Surface_Format = Window_Surface->format;
 

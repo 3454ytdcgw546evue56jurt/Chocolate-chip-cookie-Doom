@@ -1,6 +1,6 @@
 
 //TODO move to to a apstraction layer
-#include "SDL3\SDL.h"
+#include <SDL3/SDL.h>
 #include "Renderer.h"
 #include "Input.h"
 #include <stdio.h>
@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
 {
     //TODO -file to load a wad
     //TODO -print for consol printing
-    const char *WadFileName = "DOOM1.WAD";
+    const char *WadFileName = "DOOM_SHAREWERE.WAD";
 
     WAD_Header* WAD = Load_WAD(WadFileName,nullptr);
     if(WAD == nullptr)
