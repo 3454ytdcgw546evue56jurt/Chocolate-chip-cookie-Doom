@@ -103,3 +103,22 @@ void WAD_Load_Directories(FILE* Wadfile,int Directories_Offset,WAD_Header *Heade
         Header->Directories[i].size = LumpSize;
     }
 }
+
+int Lump_get_index(const char *Lump_name,WAD_Header *Header,int starting_id)
+{
+    int Lump_ammount = Header->numlumps;
+    WAD_Directory *Directories = Header->Directories;
+    WAD_Directory *Directory = nullptr;
+
+    for(int i = starting_id;i<Lump_ammount;i++)
+    {
+        Directory = &Directories[i];
+
+        if(strcmp(Directory->name,Lump_name) == 0)
+        {
+            return 0;
+        }
+    }
+
+    return -1;
+}

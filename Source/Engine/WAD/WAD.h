@@ -32,3 +32,4 @@ struct WAD_Header
 
 WAD_Header* Load_WAD(const char *FileName,WAD_Header* PatchWAD);
 void WAD_Load_Directories(FILE* Wadfile,int Directories_Offset,WAD_Header *Header);
+int Lump_get_index(const char *Lump_name,WAD_Header *Header,int starting_id);

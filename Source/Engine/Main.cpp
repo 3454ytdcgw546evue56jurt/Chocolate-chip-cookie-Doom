@@ -9,6 +9,7 @@
 #include <unistd.h>
 #include <vector>
 #include "WAD/WAD.h"
+#include "Level/Level.h"
 
 using namespace std;
 
@@ -20,6 +21,8 @@ unsigned long FrameTime;
 
 const int MinimalFrameTime = 33;
 
+LEVEL *Current_level;
+
 void OnExit()
 {
     Renderer_quit();
@@ -29,6 +32,7 @@ int main(int argc, char *argv[])
 {
     //TODO -file to load a wad
     //TODO -print for consol printing
+    //TODO -warp to select map
     const char *WadFileName = "DOOM_SHAREWERE.WAD";
 
     WAD_Header* WAD = Load_WAD(WadFileName,nullptr);
@@ -37,6 +41,11 @@ int main(int argc, char *argv[])
         printf("Error loading the Internal WAD aborting...\n");
         abort();
     }
+
+    int Level = 1;
+    int Episode = 1;
+
+    Current_level = load_level(WAD,Level,Episode);
 
     int Window_flags = SDL_WINDOW_RESIZABLE|SDL_WINDOW_HIGH_PIXEL_DENSITY;
     int window_w = 800;
